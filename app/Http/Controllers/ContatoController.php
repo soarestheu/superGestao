@@ -36,8 +36,27 @@ class ContatoController extends Controller
 
         // Validação Request
         $request->validate($regras, $feedback);
+        
+        
 
-        SiteContato::create($request->all());
+        // SiteContato::firstOrCreate($request->all());
+        // $contato = new SiteContato();
+        // $contato->nome = $request->input('nome');
+        // $contato->telefone = $request->input('telefone');
+        // $contato->email = $request->input('email');
+        // $contato->motivo_contatos_id = $request->input('motivo_contatos_id');
+        // $contato->mensagem = $request->input('mensagem');
+        // $contato->updateOrCreate();
+
+
+        SiteContato::updateOrCreate(
+            ['nome' => $request->input('nome'), 
+            'telefone' => $request->input('telefone'),
+            'email' => $request->input('email'),
+            'motivo_contatos_id' => $request->input('motivo_contatos_id'),
+            'mensagem' => $request->input('mensagem')
+            ]
+        );
         return redirect()->route('site.index');
     }
 }
